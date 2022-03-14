@@ -11,14 +11,10 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   if (err instanceof CustomError) {
-      // updated RequestValidationError -> CustomError
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
 
-  // if (err instanceof DatabaseConnectionError) {
-  //   return res.status(err.statusCode).send({ errors: err.serializeErrors() });
-  // }
-
+  console.error(err);
   res.status(400).send({
     erros: [{ message: 'Something went wrong' }]
   });
